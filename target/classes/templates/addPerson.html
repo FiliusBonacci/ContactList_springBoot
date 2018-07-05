@@ -13,6 +13,8 @@
     <link rel="stylesheet" th:href="@{/css/main.css}"
           href="../../css/main.css"/>
 
+    <link rel="stylesheet" href="https://unpkg.com/@deveodk/vue-toastr/dist/@deveodk/vue-toastr.min.css"></link>
+
     <title>Contact list - Paweł Jadanowski</title>
 </head>
 <body>
@@ -120,6 +122,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 
+<script src="https://unpkg.com/@deveodk/vue-toastr/dist/@deveodk/vue-toastr.min.js"></script>
+
+
 <script>
     var vue = new Vue({
         el: '#app',
@@ -149,11 +154,22 @@
                     category: 'category',
                 })
                     .then((response) => {
+                        this.showToastr();
                         console.log(response);
                     })
                     .catch(function (error) {
                         console.log(error);
                     })
+            },
+            showToastr: function () {
+                this.$toastr('add', {
+                    title: 'Success',
+                    msg: 'Added a new Person to DB', // Message
+                    clickClose: false, // Click Close Disable
+                    timeout: 3000, // Timeout in ms
+                    position: 'toast-top-right', // Toastr position
+                    type: 'success', // Toastr type
+                })
             }
         }
     });
