@@ -37,8 +37,9 @@ public class PersonService {
 
     }
 
-    public void addPerson(Person person) {
+    public String addPerson(Person person) {
         personRepository.save(person);
+        return "added";
     }
     
     public void updatePerson(String id, Person person) {
