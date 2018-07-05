@@ -2,8 +2,6 @@ package app.Entity;
 
 
 
-import org.springframework.stereotype.Repository;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDate;
@@ -17,12 +15,12 @@ public class Person {
     private String lastname;
     private String email;
     private String password;
-    private String phone;
-    private Category category;
+    private int phone;
+    private String category;
     private LocalDate dob;
 
 
-    public Person(int id, String firstname, String lastname, String email, String password, String phone, Category category, LocalDate dob) {
+    public Person(int id, String firstname, String lastname, String email, String password, int phone, String category, LocalDate dob) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -33,7 +31,7 @@ public class Person {
         this.dob = dob;
     }
 
-    public Person(String firstname, String lastname, String email, String password, String phone, Category category, LocalDate dob) {
+    public Person(String firstname, String lastname, String email, String password, int phone, String category, LocalDate dob) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -85,19 +83,19 @@ public class Person {
         this.password = password;
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

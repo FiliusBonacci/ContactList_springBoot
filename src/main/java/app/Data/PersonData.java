@@ -16,8 +16,8 @@ public class PersonData {
 
 
     private static List<Person> personList = new ArrayList<>(Arrays.asList(
-            new Person(1,"Adam", "Nowak", "anowak@mail.com", "123", "500 100 200", PRIVATE, LocalDate.of(1990,2,12)),
-            new Person("Ania", "Kowalska", "akowalska@mail.com", "123", "500 100 200", BUSINESS, LocalDate.of(1990,2,12))
+            new Person(1,"Adam", "Nowak", "anowak@mail.com", "123", 500100200, "Prywatny", LocalDate.of(1990,2,12)),
+            new Person("Ania", "Kowalska", "akowalska@mail.com", "123", 500100200, "Biznesowy", LocalDate.of(1990,2,12))
     ));
 
 
