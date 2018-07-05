@@ -6,9 +6,7 @@ import app.Repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PersonService {
@@ -20,18 +18,23 @@ public class PersonService {
     private PersonRepository personRepository;
 
     public Collection<Person> getAllPeople(){
-//        return personData.getAllPeople();
+
         List<Person> personList = new ArrayList<>();
         personRepository.findAll()
                         .forEach(personList::add);
         return personList;
     }
 
-    public Person getPersonBy(String id){
-        return personData.getAllPeople().stream()
-                .filter(p -> p.getId() == Integer.valueOf(id))
-                .findFirst()
-                .get();
+    public Optional<Person> getPersonBy(String id){
+
+        Optional<Person> person = personRepository.findById(Integer.valueOf(id));
+        return person;
+
+//        return personData.getAllPeople().stream()
+//                .filter(p -> p.getId() == Integer.valueOf(id))
+//                .findFirst()
+//                .get();
+
     }
 
     public void addPerson(Person person) {
@@ -39,12 +42,10 @@ public class PersonService {
     }
     
     public void updatePerson(String id, Person person) {
-        for (int i = 0; i < personData.getAllPeople().size(); i++) {
-
-        }
+        personRepository.save(person); // metoda save() moze rowniez zrobic update na rekordzie jesli rekord o podanym id juz istnieje
     }
 
     public void deletePerson(String id) {
-        System.out.println("Removed");
+        personRepository.deleteById(Integer.valueOf(id));
     }
 }

@@ -1,0 +1,86 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css"/>
+
+    <title>Contact list - Paweł Jadanowski</title>
+</head>
+<body>
+<div id="app">
+
+    <div class="container">
+        <h1>Contact list</h1>
+
+
+        <div class="card" style="width: 18rem;"
+             v-for="p in people">
+            <div class="card-body">
+                <h5 class="card-title">{{ p.firstname + " " + p.lastname}} </h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ p.category }}</h6>
+                <p class="card-text">
+                <ul>
+                    <li><strong>Email: </strong>{{ p.email }}</li>
+                    <li><strong>Telefon: </strong>{{ p.phone }}</li>
+                    <li><strong>Data ur: </strong>{{ p.dob }}</li>
+                </ul>
+                </p>
+                <a href="#" class="card-link">Szczegóły</a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            people: []
+        },
+        mounted() {
+            this.getAllPeople();
+        },
+        methods: {
+            getAllPeople: function () {
+                var self = this;
+                axios.get('/persons/')
+                    .then((response) => {
+                        self.people = response.data;
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            }
+        }
+    });
+</script>
+</body>
+</html>

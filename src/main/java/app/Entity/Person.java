@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
-@Entity
+@Entity // This tells Hibernate to make a table out of this class
 public class Person {
 
     @Id
