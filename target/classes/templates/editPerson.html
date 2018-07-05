@@ -1,0 +1,203 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css"/>
+
+    <link rel="stylesheet" href="https://unpkg.com/@deveodk/vue-toastr/dist/@deveodk/vue-toastr.min.css"></link>
+
+    <title>Contact list - Paweł Jadanowski</title>
+</head>
+<body>
+<div id="app">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/persons/add">Add person</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <h1>Edit person </h1>
+
+
+        <div class="card">
+            <div class="card-body">
+
+                <form action="#" th:action="@{/persons/update}" method="post" @submit.prevent="update">
+                    <input type="hidden" name="id" id="id" v-model="id" th:value="${id}">
+                    <div class="form-group row">
+                        <label for="firstname" class="col-sm-2 col-form-label">Firstname</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="firstname" id="firstname" class="form-control"
+                                   th:placeholder="firstname" v-model="firstname">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="lastname" class="col-sm-2 col-form-label">Lastname</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="lastname" id="lastname"  class="form-control"
+                                   th:placeholder="lastname" v-model="lastname">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="email"
+                                   placeholder="Email" v-model="email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password"
+                                   placeholder="Password" v-model="password">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+<script src="https://unpkg.com/@deveodk/vue-toastr/dist/@deveodk/vue-toastr.min.js"></script>
+
+
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            id: document.getElementById("id").value,
+            firstname: '',
+            lastname: '',
+            email: '',
+            password: '',
+            dob: '',
+            phone: '',
+            category: 'category',
+        },
+        mounted() {
+            this.getData();
+            console.log("id:"+this.id);
+        },
+        methods: {
+            getData: function () {
+                var self = this;
+
+                axios.get("/persons/"+ self.id)
+                    .then((response) => {
+
+                        self.firstname= response.data.firstname;
+                        self.lastname= response.data.lastname;
+                        self.email= response.data.email;
+                        self.password= response.data.password;
+                        self.dob= response.data.dob;
+                        self.phone= response.data.phone;
+                        self.category= response.data.category;
+
+                        console.log(response)
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            },
+            update: function () {
+                var self = this;
+
+                axios.put('/persons/update/5', {
+                    id: self.id,
+                    firstname: self.firstname,
+                    lastname: self.lastname,
+                    email: self.email,
+                    password: self.password,
+                    dob: self.dob,
+                    phone: self.phone,
+                    category: self.category
+                    })
+                    .then((response) => {
+                        this.tostrSuccess()
+                        console.log(response)
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            },
+
+            tostrSuccess: function () {
+                this.$toastr('add', {
+                    title: 'Success',
+                    msg: 'Updated', // Message
+                    clickClose: false, // Click Close Disable
+                    timeout: 3000, // Timeout in ms
+                    position: 'toast-top-right', // Toastr position
+                    type: 'success', // Toastr type
+                })
+            }
+        }
+    });
+</script>
+</body>
+</html>
