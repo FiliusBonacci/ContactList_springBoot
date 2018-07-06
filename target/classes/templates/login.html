@@ -1,5 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -48,39 +49,19 @@
 
             </ul>
 
-            <!--<ul class="ml-auto">-->
-                <!--<li class="nav-item active">-->
-                    <!--<a class="nav-link" href="/login">Login </a>-->
-                <!--</li>-->
-                <!--<li class="nav-item active">-->
-                    <!--<a class="nav-link" href="/register">Register </a>-->
-                <!--</li>-->
-            <!--</ul>-->
-
         </div>
-
     </nav>
 
 
     <div class="container">
-        <h1>Contact list</h1>
+        <h1>Login</h1>
         <div class="row">
-            <div class="col-md-4" v-for="p in people">
+            <div class="col-md-4" >
                 <div class="card mb-20">
                     <div class="card-body">
-                        <h5 class="card-title">{{ p.firstname + " " + p.lastname}} </h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ p.category }}</h6>
-                        <p class="card-text">
-                        <ul>
-                            <li><strong>Email: </strong>{{ p.email }}</li>
-                            <li><strong>Telefon: </strong>{{ p.phone }}</li>
-                            <li><strong>Data ur: </strong>{{ p.dob }}</li>
-                        </ul>
-                        </p>
 
-                        <!--only for logged users-->
-                        <a href="/person/edit/{{p.id}}" class="card-link">Edytuj</a>
-                        <a href="/persons/delete/5" class="card-link">Usuń</a>
+
+
 
                     </div>
                 </div>
@@ -105,29 +86,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 
-<script>
-    var vue = new Vue({
-        el: '#app',
-        data: {
-            people: []
-        },
-        mounted() {
-            this.getAllPeople();
-        },
-        methods: {
-            getAllPeople: function () {
-                var self = this;
-                axios.get('/persons/')
-                    .then((response) => {
-                        self.people = response.data;
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    })
-            }
-        }
-    });
-</script>
+
 </body>
 </html>

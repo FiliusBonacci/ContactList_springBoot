@@ -48,7 +48,17 @@
 
             </ul>
 
+            <!--<ul class="ml-auto">-->
+                <!--<li class="nav-item active">-->
+                    <!--<a class="nav-link" href="/login">Login </a>-->
+                <!--</li>-->
+                <!--<li class="nav-item active">-->
+                    <!--<a class="nav-link" href="/register">Register </a>-->
+                <!--</li>-->
+            <!--</ul>-->
+
         </div>
+
     </nav>
 
 
@@ -67,7 +77,10 @@
                             <li><strong>Data ur: </strong>{{ p.dob }}</li>
                         </ul>
                         </p>
-                        <a href="/person/edit/@{{p.id}}" class="card-link">Edytuj</a>
+
+                        <!--only for logged users-->
+                        <a href="/person/edit/{{p.id}}" class="card-link">Edytuj</a>
+                        <a href="/persons/delete/5" class="card-link">Usuń</a>
 
                     </div>
                 </div>
