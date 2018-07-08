@@ -91,6 +91,28 @@
                                    placeholder="Password" v-model="password">
                         </div>
                     </div>
+                    
+                    <div class="form-group row">
+                        <label for="category" class="col-sm-2 col-form-label">Kategoria</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="category" v-model="category_select" @change="category_select_change">
+                                <option value="sluzbowy">Służbowy</option>
+                                <option value="prywatny">Prywatny</option>
+                                <option value="inny">Inny</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-10 offset-md-2" v-if="category_select === 'sluzbowy'">
+                            <select class="form-control" name="category_sluzbowy" @change="sluzb_select" v-model="categ_sluzb">
+                                <option value="Szef">Szef</option>
+                                <option value="Klient">Klient</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-10 offset-md-2" v-else-if="category_select == 'inny'">
+                            <input type="text" name="other" value="" class="form-control" placeholder="podaj inna kategorie" v-model="categ_inny" @keyup="catg_inny_method">
+                        </div>
+                    </div>
 
                     <div class="form-group row">
                         <div class="col-sm-10">
@@ -135,7 +157,10 @@
             password: '',
             dob: '',
             phone: '',
-            category: 'category',
+            category: 'Prywatny', // bez wybrania
+            category_select: '',
+            categ_sluzb: '',
+            categ_inny: ''
         },
         mounted() {
 
@@ -151,7 +176,7 @@
                     password: self.password,
                     dob: '2000-02-02',
                     phone: 45654,
-                    category: 'category',
+                    category: self.category,
                 })
                     .then((response) => {
                         this.showToastr();
@@ -170,6 +195,17 @@
                     position: 'toast-top-right', // Toastr position
                     type: 'success', // Toastr type
                 })
+            },
+            category_select_change: function () {
+              this.category = this.category_select;
+                console.log(this.category);
+            },
+            sluzb_select: function () {
+                this.category = this.categ_sluzb;
+            },
+            catg_inny_method: function () {
+                this.category = this.categ_inny;
+                console.log(this.category);
             }
         }
     });
